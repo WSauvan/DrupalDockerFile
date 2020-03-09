@@ -5,6 +5,7 @@ RUN apk add --repository http://dl-cdn.alpinelinux.org/alpine/edge/main libpng-d
 
 # Make Composer install times bearable
 RUN composer global require drupal/coder
+RUN composer global require dealerdirect/phpcodesniffer-composer-installer
 
 # Make Composer install times bearable
 RUN composer global require hirak/prestissimo
