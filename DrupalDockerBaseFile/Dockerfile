@@ -11,11 +11,6 @@ RUN apk --update add \
     patch \
     tar
 
-# Docker Compose with glibc bypass.
-RUN curl -Lo glibc.apk https://github.com/WSauvan/DrupalDockerFile/raw/master/glibc-2.23-r3.apk && \
-    curl -Lo glibc-bin.apk https://github.com/WSauvan/DrupalDockerFile/raw/master/2.23-r3/glibc-bin-2.23-r3.apk && \
-    apk add glibc.apk glibc-bin.apk
-
 # Install PHP.
 RUN apk --no-cache --update --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main add \
     libressl && \
