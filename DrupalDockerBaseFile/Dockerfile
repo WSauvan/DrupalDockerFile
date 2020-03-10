@@ -33,10 +33,10 @@ RUN apk --no-cache --update --repository=http://dl-cdn.alpinelinux.org/alpine/ed
     php7-zlib
 
 # Correct paths.
-RUN ln -s /etc/php7 /etc/php && \
-    ln -s /usr/bin/php7 /usr/bin/php && \
-    ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm && \
-    ln -s /usr/lib/php7 /usr/lib/php
+RUN ln -s /etc/php7 /etc/php
+RUN ln -s /usr/bin/php7 /usr/bin/php
+RUN ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm
+RUN ln -s /usr/lib/php7 /usr/lib/php
 
 # Install Composer.
 RUN curl -sS https://getcomposer.org/installer | php \
