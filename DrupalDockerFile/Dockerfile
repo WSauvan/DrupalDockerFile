@@ -1,4 +1,4 @@
-FROM drupalwxt/gitlab-ci
+FROM wsauvanwebqam/drupal-docker-base:latest
 
 # Make Composer install times bearable
 RUN composer global require "squizlabs/php_codesniffer=*"
