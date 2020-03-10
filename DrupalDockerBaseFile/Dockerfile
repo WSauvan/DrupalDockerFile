@@ -15,7 +15,7 @@ RUN apk --update add \
 RUN curl -Lo /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub && \
     curl -Lo glibc.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.23-r3/glibc-2.23-r3.apk && \
     curl -Lo glibc-bin.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.23-r3/glibc-bin-2.23-r3.apk && \
-    apk add glibc.apk glibc-bin.apk
+    apk add --allow-untrusted glibc.apk glibc-bin.apk
 
 # Install PHP.
 RUN apk --no-cache --update --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main add \
