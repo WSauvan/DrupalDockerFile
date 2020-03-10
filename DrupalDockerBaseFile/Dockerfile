@@ -11,6 +11,11 @@ RUN apk --update add \
     patch \
     tar
 
+# Docker Compose with glibc bypass.
+RUN curl -Lo glibc.apk https://github.com/WSauvan/DrupalDockerFile/raw/master/glibc-2.23-r3.apk && \
+    curl -Lo glibc-bin.apk https://github.com/WSauvan/DrupalDockerFile/raw/master/2.23-r3/glibc-bin-2.23-r3.apk && \
+    apk add glibc.apk glibc-bin.apk
+
 # Install PHP.
 RUN apk --no-cache --update --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main add \
     libressl && \
@@ -42,6 +47,11 @@ RUN ln -s /usr/lib/php7 /usr/lib/php
 # Install Composer.
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
+
+# Install Docker Compose.
+RUN curl -Lo docker-compose https://github.com/docker/compose/releases/download/1.8.1/docker-compose-Linux-x86_64 && \
+    chmod +x docker-compose && \
+    mv docker-compose /usr/local/bin
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
