@@ -39,11 +39,10 @@ RUN apk --no-cache --update --repository=http://dl-cdn.alpinelinux.org/alpine/ed
     php7-zlib
 
 # Correct paths.
-RUN mv /usr/bin/php /usr/bin/php5
-RUN ln -s /etc/php7 /etc/php
-RUN ln -s /usr/bin/php7 /usr/bin/php
-RUN ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm
-RUN ln -s /usr/lib/php7 /usr/lib/php
+RUN ln -s /etc/php7 /etc/php && \
+    ln -s /usr/bin/php7 /usr/bin/php && \
+    ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm && \
+    ln -s /usr/lib/php7 /usr/lib/php
 
 # Install Composer.
 RUN curl -sS https://getcomposer.org/installer | php \
@@ -53,6 +52,14 @@ RUN curl -sS https://getcomposer.org/installer | php \
 RUN curl -Lo docker-compose https://github.com/docker/compose/releases/download/1.8.1/docker-compose-Linux-x86_64 && \
     chmod +x docker-compose && \
     mv docker-compose /usr/local/bin
+
+# Install Go Jira.
+RUN curl -Lo jira https://github.com/Netflix-Skunkworks/go-jira/releases/download/v0.1.9/jira-linux-amd64 && \
+    chmod +x jira && \
+    mv jira /usr/local/bin
+
+# Security fix for CVE-2016-0777 and CVE-2016-0778
+RUN echo -e 'Host *\nUseRoaming no' >> /etc/ssh/ssh_config
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
