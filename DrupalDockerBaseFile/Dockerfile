@@ -33,7 +33,7 @@ RUN apk --no-cache --update --repository=http://dl-cdn.alpinelinux.org/alpine/ed
     php7-zlib
 
 # Correct paths.
-RUN mv /etc/php /etc/php5
+RUN mv /usr/bin/php /usr/bin/php5
 RUN ln -s /etc/php7 /etc/php
 RUN ln -s /usr/bin/php7 /usr/bin/php
 RUN ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm
