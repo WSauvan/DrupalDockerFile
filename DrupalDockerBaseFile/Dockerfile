@@ -39,6 +39,8 @@ RUN apk --no-cache --update --repository=http://dl-cdn.alpinelinux.org/alpine/ed
 
 # Correct paths.
 RUN ln -s /etc/php7 /etc/php && \
+    mv /usr/bin/php /usr/bin/php5 && \
+    ln -s /usr/bin/php7 /usr/bin/php && \
     ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm && \
     ln -s /usr/lib/php7 /usr/lib/php
 
