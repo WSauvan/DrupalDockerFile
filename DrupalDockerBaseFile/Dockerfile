@@ -12,9 +12,8 @@ RUN apk --update add \
     tar
 
 # Docker Compose with glibc bypass.
-RUN curl -Lo /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub && \
-    curl -Lo glibc.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.23-r3/glibc-2.23-r3.apk && \
-    curl -Lo glibc-bin.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.23-r3/glibc-bin-2.23-r3.apk && \
+RUN curl -Lo glibc.apk https://github.com/WSauvan/DrupalDockerFile/raw/master/glibc-2.23-r3.apk && \
+    curl -Lo glibc-bin.apk https://github.com/WSauvan/DrupalDockerFile/raw/master/glibc-bin-2.23-r3.apk && \
     apk add --allow-untrusted glibc.apk glibc-bin.apk
 
 # Install PHP.
@@ -40,7 +39,6 @@ RUN apk --no-cache --update --repository=http://dl-cdn.alpinelinux.org/alpine/ed
 
 # Correct paths.
 RUN ln -s /etc/php7 /etc/php && \
-    ln -s /usr/bin/php7 /usr/bin/php && \
     ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm && \
     ln -s /usr/lib/php7 /usr/lib/php
 
@@ -53,15 +51,8 @@ RUN curl -Lo docker-compose https://github.com/docker/compose/releases/download/
     chmod +x docker-compose && \
     mv docker-compose /usr/local/bin
 
-# Install Go Jira.
-RUN curl -Lo jira https://github.com/Netflix-Skunkworks/go-jira/releases/download/v0.1.9/jira-linux-amd64 && \
-    chmod +x jira && \
-    mv jira /usr/local/bin
-
 # Security fix for CVE-2016-0777 and CVE-2016-0778
 RUN echo -e 'Host *\nUseRoaming no' >> /etc/ssh/ssh_config
-
-COPY docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["sh"]
